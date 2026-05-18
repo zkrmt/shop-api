@@ -2,37 +2,13 @@ import express from "express"
 import router from "./routes/authRoutes.js"
 import order from "./routes/orderRoutes.js"
 import product from "./routes/productRoutes.js"
-import Stripe from "stripe"
-import pool from "./models/db.js"
-import dotenv from "dotenv"
+import webhook from "./routes/webhookRoutes.js"
 
-dotenv.config()
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const app = express()
-app.post("/webhook", express.raw({type: "application/json"}), async (req, res) => {
-    const sig = req.headers["stripe-signature"]
-    let event
 
-    try {
-        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET)
-    } catch(err) {
-        return res.status(400).json({error: err.message})
-    }
-
-    if(event.type === "checkout.session.completed"){
-        const session = event.data.object
-        const orderId = session.metadata?.orderId
-        if(!orderId){
-            return res.status(400).json({error:"orderId missing"})
-        }
-        await pool.query("UPDATE orders SET status = 'paid' WHERE id = $1", [orderId])
-    }
-
-    res.json({received: true})
-})
-
+app.use("/webhook", express.raw({type:"application/json"}),webhook)
 
 app.use (express.json())
 

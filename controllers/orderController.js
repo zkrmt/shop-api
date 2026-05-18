@@ -1,5 +1,5 @@
 import pool from "../models/db.js"
-import Stripe from "stripe"
+import stripe from "../config/stripe.js"
 
 
 
@@ -56,7 +56,6 @@ const getById = async(req,res)=>{
 
 
 
-const stripe =  new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const createPayment = async(req,res)=>{
     try{
