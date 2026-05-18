@@ -24,6 +24,9 @@ app.post("/webhook", express.raw({type: "application/json"}), async (req, res) =
     if(event.type === "checkout.session.completed"){
         const session = event.data.object
         const orderId = session.metadata?.orderId
+        if(!orderId){
+            return res.status(400).json({error:"orderId missing"})
+        }
         await pool.query("UPDATE orders SET status = 'paid' WHERE id = $1", [orderId])
     }
 
