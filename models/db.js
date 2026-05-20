@@ -1,7 +1,7 @@
 import pg from"pg"
 import dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config({ path: "/var/www/shop-api/.env" })
 
 const {Pool} = pg
 
