@@ -3,7 +3,9 @@ import router from "./routes/authRoutes.js"
 import order from "./routes/orderRoutes.js"
 import product from "./routes/productRoutes.js"
 import webhook from "./routes/webhookRoutes.js"
+import dotenv from "dotenv"
 
+dotenv.config()
 
 
 const app = express()
