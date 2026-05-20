@@ -1,5 +1,3 @@
-import dotenv from "dotenv"
-dotenv.config()
 import express from "express"
 import router from "./routes/authRoutes.js"
 import order from "./routes/orderRoutes.js"
