@@ -1,6 +1,10 @@
 # Shop API 🛍️
 
-A REST API for an e-commerce boutique built with Node.js, Express, PostgreSQL, JWT Authentication and Stripe payments.
+A production-ready REST API for an e-commerce boutique built with Node.js, Express, PostgreSQL, JWT Authentication and Stripe payments. Deployed on a VPS with a custom domain and HTTPS.
+
+## Live URL 🌐
+
+`https://zakmt.dev`
 
 ## Technologies 🛠️
 
@@ -47,10 +51,17 @@ MVC (Model, View, Controller)
 DB_HOST=localhost
 DB_USER=postgres
 DB_PASSWORD=yourpassword
-DB_NAME=boutique
+DB_NAME=yourdbname
 DB_PORT=5432
 JWT_SECRET=yoursecret
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
-CLIENT_URL=http://localhost:3000
+CLIENT_URL=https://yourdomaine.dev
 ```
+
+## Deployment 🚀
+
+Deployed on **DigitalOcean VPS** with :
+- **Nginx** → reverse proxy
+- **PM2** → process manager
+- **Let's Encrypt** → SSL certificate
